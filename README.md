@@ -4,8 +4,6 @@ Aplicação web que gera **assinaturas de e-mail** e **comunicados** padronizado
 em PNG, prontos para usar no Outlook ou compartilhar. Desenvolvida para
 padronizar a comunicação interna e eliminar a edição manual de imagens.
 
-![Preview](docs/preview.png)
-
 ## Funcionalidades
 
 - Assinatura de e-mail com preview em tempo real e dimensões fixas (533×133 px)
