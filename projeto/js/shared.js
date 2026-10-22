@@ -11,7 +11,12 @@
   // Primary CDN, with a fallback to a second CDN in case cdnjs.cloudflare.com
   // specifically is blocked by a network/firewall (common on some corporate
   // networks) but other CDNs are reachable.
-  (function loadHtml2Canvas(){
+  // Só as telas que geram imagem via html2canvas chamam App.loadHtml2Canvas()
+  // (assinatura e comunicado). Telas que não usam a biblioteca nem a baixam.
+  var html2canvasRequested = false;
+  App.loadHtml2Canvas = function(){
+    if (html2canvasRequested || typeof html2canvas !== 'undefined') return;
+    html2canvasRequested = true;
     var s = document.createElement('script');
     s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
     s.onerror = function(){
@@ -20,7 +25,7 @@
       document.head.appendChild(fallback);
     };
     document.head.appendChild(s);
-  })();
+  };
 
   /* ============ Imagens embutidas ============ */
   // <img data-asset="logo"> recebe o base64 definido em assets.js
@@ -65,6 +70,7 @@
   // may never load. This waits briefly for it before giving up, so the
   // person gets one clear, actionable error instead of a silent failure.
   App.ensureHtml2Canvas = function(){
+    App.loadHtml2Canvas();
     if (typeof html2canvas !== 'undefined') return Promise.resolve();
     return new Promise(function(resolve, reject){
       var attempts = 0;
