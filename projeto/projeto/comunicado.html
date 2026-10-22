@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Comunicado — Refrigerantes do Triângulo</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/comunicado.css">
+</head>
+<body>
+
+  <!-- ============ Header component ============ -->
+  <header class="app-header">
+    <div class="app-header__inner">
+      <div class="app-header__mark" aria-hidden="true"></div>
+      <div>
+        <h1>Central de Materiais Internos</h1>
+        <p>Assinaturas de e-mail e comunicados, prontos em segundos.</p>
+      </div>
+      <span class="app-header__badge">Refrigerantes do Triângulo</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ Navegação entre telas ============ -->
+    <nav class="tabs" aria-label="Telas">
+      <a class="tab-link" href="index.html">Assinatura de E-mail</a>
+      <a class="tab-link active" href="comunicado.html" aria-current="page">Comunicado</a>
+      <a class="tab-link" href="foto-whatsapp.html">Foto do WhatsApp</a>
+    </nav>
+
+    <div class="tab-grid">
+    <!-- ============ ComunicadoForm component ============ -->
+    <section class="panel" aria-labelledby="com-form-title">
+      <h2 id="com-form-title">Dados do comunicado</h2>
+      <p class="panel__hint">Os dados ficam só no seu navegador — nada é enviado a nenhum servidor.</p>
+
+      <form id="comunicado-form" novalidate>
+        <div class="field">
+          <label for="input-com-tipo">Tipo (cabeçalho) <span class="req">*</span></label>
+          <input id="input-com-tipo" name="comTipo" type="text" placeholder="Ex.: AVISO ou COMUNICADO" maxlength="20" value="AVISO">
+          <div class="field__error" id="error-com-tipo">Informe o tipo do aviso.</div>
+        </div>
+
+        <div class="field">
+          <label for="input-com-titulo">Título do comunicado <span class="req">*</span></label>
+          <input id="input-com-titulo" name="comTitulo" type="text" placeholder="Ex.: Uso de Uniformes" maxlength="70">
+          <div class="field__error" id="error-com-titulo">Informe o título do comunicado.</div>
+        </div>
+
+        <div class="field">
+          <label for="input-com-corpo">Corpo do texto <span class="req">*</span></label>
+          <div class="editor-toolbar">
+            <button type="button" class="editor-btn editor-btn__bold" id="btn-fmt-bold" title="Negrito">N</button>
+            <button type="button" class="editor-btn editor-btn__red" id="btn-fmt-red" title="Vermelho"><span>A</span><em></em></button>
+            <button type="button" class="editor-btn editor-btn__center" id="btn-fmt-center" title="Centralizar parágrafo"><i></i><i></i><i></i></button>
+          </div>
+          <textarea id="input-com-corpo" name="comCorpo" rows="10" class="has-toolbar" placeholder="Prezados(as),
+
+Escreva aqui o corpo do comunicado. Deixe uma linha em branco entre parágrafos.
+
+Selecione um trecho e use os botões acima para negrito, vermelho ou centralizar.
+
+Para lista com marcadores, comece a linha com &quot;- &quot;:
+- Primeiro item
+- Segundo item
+
+Atenciosamente,"></textarea>
+          <div class="field__error" id="error-com-corpo">Escreva o corpo do comunicado.</div>
+          <p class="field__hint">Selecione um trecho do texto e clique em <strong>N</strong> (negrito), <strong>A</strong> (vermelho) ou no ícone de alinhamento (centralizar o parágrafo). Enter = pula linha · linha em branco = novo parágrafo (com espaço extra) · linha começando com <code>- </code> = item de lista.</p>
+        </div>
+
+        <div class="field">
+          <label for="input-com-depto">Departamento <span class="req">*</span></label>
+          <input id="input-com-depto" name="comDepto" type="text" placeholder="Ex.: Time de Gente e Gestão" maxlength="60">
+          <div class="field__error" id="error-com-depto">Informe o departamento.</div>
+        </div>
+      </form>
+    </section>
+
+    <!-- ============ ComunicadoPreview + ComunicadoGenerator components ============ -->
+    <section class="panel" aria-labelledby="com-preview-title">
+      <h2 id="com-preview-title">Pré-visualização</h2>
+      <p class="panel__hint">Atualizada automaticamente enquanto você digita.</p>
+
+      <div class="preview-shell preview-shell--comunicado">
+        <div id="comunicado-scale-outer">
+        <div id="comunicado-frame">
+          <div class="com-header">
+            <div class="com-header__yellow" id="com-tipo">AVISO</div>
+            <div class="com-header__logo">
+              <img data-asset="logo" alt="Refrigerantes do Triângulo — desde 1965" width="72" height="103" style="display:block; width:72px; height:103px;">
+            </div>
+            <div class="com-header__red"></div>
+          </div>
+          <div class="com-content">
+            <h1 id="com-titulo" class="com-titulo">TÍTULO DO COMUNICADO</h1>
+            <div class="com-body">
+               <!-- <p>Prezados(as),</p>  -->
+              <div id="com-corpo"><p>Escreva o corpo do comunicado ao lado — ele aparece aqui em tempo real.</p></div>
+            </div>
+          </div>
+          <div class="com-footer">
+            <hr class="com-rule">
+            <p id="com-depto" class="com-depto-footer">DEPARTAMENTO</p>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" id="btn-baixar-comunicado">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Baixar comunicado
+        </button>
+      </div>
+    </section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toast-text">Assinatura copiada com sucesso!</span>
+  </div>
+
+  <script src="js/assets.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/comunicado.js"></script>
+</body>
+</html>
