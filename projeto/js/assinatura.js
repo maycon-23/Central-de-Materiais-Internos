@@ -9,6 +9,8 @@
   var showToast = App.showToast;
   var setFieldState = App.setFieldState;
 
+  App.loadHtml2Canvas(); // gera o PNG via html2canvas
+
   /* ============ Field refs ============ */
   var elNome = document.getElementById('input-nome');
   var elCargo = document.getElementById('input-cargo');
