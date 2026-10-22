@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Assinatura de E-mail — Refrigerantes do Triângulo</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/assinatura.css">
+</head>
+<body>
+
+  <!-- ============ Header component ============ -->
+  <header class="app-header">
+    <div class="app-header__inner">
+      <div class="app-header__mark" aria-hidden="true"></div>
+      <div>
+        <h1>Central de Materiais Internos</h1>
+        <p>Assinaturas de e-mail e comunicados, prontos em segundos.</p>
+      </div>
+      <span class="app-header__badge">Refrigerantes do Triângulo</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ Navegação entre telas ============ -->
+    <nav class="tabs" aria-label="Telas">
+      <a class="tab-link active" href="index.html" aria-current="page">Assinatura de E-mail</a>
+      <a class="tab-link" href="comunicado.html">Comunicado</a>
+    </nav>
+
+    <div class="tab-grid">
+    <!-- ============ SignatureForm component ============ -->
+    <section class="panel" aria-labelledby="form-title">
+      <h2 id="form-title">Seus dados</h2>
+      <p class="panel__hint">Os dados ficam só no seu navegador — nada é enviado a nenhum servidor.</p>
+
+      <form id="signature-form" novalidate>
+        <div class="field">
+          <label for="input-nome">Nome completo <span class="req">*</span></label>
+          <input id="input-nome" name="nome" type="text" autocomplete="name" placeholder="Ex.: Lidianne Cássia" maxlength="60">
+          <div class="field__error" id="error-nome">Informe seu nome completo.</div>
+        </div>
+
+        <div class="field">
+          <label for="input-cargo">Setor / Cargo <span class="req">*</span></label>
+          <input id="input-cargo" name="cargo" type="text" autocomplete="organization-title" placeholder="Ex.: Projetos &amp; Inovação" maxlength="60">
+          <div class="field__error" id="error-cargo">Informe seu setor ou cargo.</div>
+        </div>
+
+        <div class="field">
+          <label for="input-telefone">WhatsApp / Celular <span class="req">*</span></label>
+          <div class="field__phone-wrap">
+            <span class="field__prefix" aria-hidden="true">+55</span>
+            <input id="input-telefone" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="34 9 9999-9999 ou 34 3292-4500" maxlength="16">
+          </div>
+          <div class="field__error" id="error-telefone">Informe um telefone válido, com ou sem o 9 (ex.: 34 3292-4500 ou 34 9 9999-9999).</div>
+        </div>
+
+        <div class="field">
+          <label for="input-email">E-mail <span class="req">*</span></label>
+          <input id="input-email" name="email" type="text" inputmode="email" autocomplete="email" placeholder="nome@guaranamineiro.com.br" maxlength="80">
+          <div class="field__error" id="error-email">Informe um e-mail válido.</div>
+        </div>
+      </form>
+    </section>
+
+    <!-- ============ SignaturePreview + SignatureGenerator components ============ -->
+    <section class="panel" aria-labelledby="preview-title">
+      <h2 id="preview-title">Pré-visualização</h2>
+      <p class="panel__hint">Atualizada automaticamente enquanto você digita.</p>
+
+      <div class="preview-shell">
+        <!-- Real signature markup — table-based, inline CSS, Outlook-safe.
+             Wrapped in a fixed-size frame (533x133px) so the exported PNG
+             always has the exact dimensions Marketing asked for. -->
+        <div id="signature-frame" style="width:533px; height:133px; max-width:533px; max-height:133px; overflow:hidden; background:#ffffff;">
+        <table id="signature-root" role="presentation" cellpadding="0" cellspacing="0" border="0"
+               style="width:533px; height:133px; font-family:'Arial Narrow', Arial, sans-serif; border-collapse:collapse; background:#ffffff;">
+          <tr>
+            <td valign="middle" style="width:82px; padding:0 16px 0 16px;">
+              <img data-asset="logo"
+                   alt="Refrigerantes do Triângulo — desde 1965"
+                   width="82" height="117"
+                   style="display:block; width:82px; height:117px;">
+            </td>
+            <td valign="middle" style="padding:0 16px 0 0;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+                <tr>
+                  <td id="sig-nome" style="font-family:'Haettenschweiler',Impact,'Arial Narrow',sans-serif; font-size:34px; font-weight:normal; color:#CB002A; padding:0 0 2px 0; line-height:1.15; letter-spacing:0.2px; white-space:nowrap;">NOME COMPLETO</td>
+                </tr>
+                <tr>
+                  <td id="sig-cargo" style="font-family:'Arial Narrow', Arial, sans-serif; font-size:19px; font-weight:normal; color:#CB002A; padding:0 0 9px 0; line-height:1.2; white-space:nowrap;">Setor / Cargo</td>
+                </tr>
+                <tr>
+                  <td style="padding:0;">
+                    <table id="sig-contact-table" role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+                      <tr>
+                        <td valign="middle" style="padding:0 6px 0 0;">
+                          <img data-asset="whatsapp" alt="WhatsApp" width="24" height="24" style="display:block; width:24px; height:24px;">
+                        </td>
+                        <td id="sig-telefone" valign="middle" style="font-family:'Arial Narrow', Arial, sans-serif; font-size:18px; font-weight:normal; color:#CB002A; padding:0 16px 0 0; white-space:nowrap;">34 9 9999-9999</td>
+                        <td valign="middle" style="padding:0 6px 0 0;">
+                          <img data-asset="email" alt="E-mail" width="24" height="20" style="display:block; width:24px; height:20px;">
+                        </td>
+                        <td id="sig-email" valign="middle" style="font-family:'Arial Narrow', Arial, sans-serif; font-size:18px; font-weight:normal; color:#CB002A; padding:0; white-space:nowrap;">nome@guaranamineiro.com.br</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-secondary" id="btn-baixar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Baixar assinatura
+        </button>
+      </div>
+
+      <p class="footnote">Dica para o Outlook: em Arquivo → Opções → E-mail → Assinaturas, insira a imagem baixada e redimensione-a para 533×133px (arraste pelo canto ou defina o tamanho exato) para manter a nitidez.</p>
+    </section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toast-text">Assinatura copiada com sucesso!</span>
+  </div>
+
+  <script src="js/assets.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/assinatura.js"></script>
+</body>
+</html>
